@@ -8,21 +8,28 @@ class Shop
   	def add_milkshake(milkshake)
     	@milkshakes.push(milkshake)
   	end
-=begin
-  	def checkout
 
-  		#Add each ingredients price to our total
+  	def show_milkshakes
+  		puts "The milkshakes in the cart are:"
+  		@milkshakes.each do |milkshake|
+  			puts "The #{milkshake.name}'s milkshake"
+  		end
+  	end
+
+  	def checkout
+		@total_price = 0
+  		#Add each milkshake price to our total
   		@milkshakes.each do |milkshake|
     	@total_price += milkshake.price_of_milkshake
   		end
    		#return  our total price to whoever called for it
    		@total_price
   	end
-=end
+
 end
 
 class MilkShake
-	attr_reader :total_price_of_milkshake, :ingredients, :name
+	attr_reader :price_of_milkshake, :ingredients, :name
   def initialize(name)
     @base_price = 3
     @ingredients = [ ]   
@@ -55,7 +62,7 @@ end
 
 
 
-nizars_milkshake = MilkShake.new("nizars")
+nizars_milkshake = MilkShake.new("nizar")
 alex_milkshake = MilkShake.new("alex")
 banana = Ingredient.new("Banana", 2)
 chocolate_chips = Ingredient.new("Chocolate Chips", 1)
@@ -72,8 +79,9 @@ alex_milkshake.add_ingredient(white_chocolate)
 puts nizars_milkshake.price_of_milkshake
 puts alex_milkshake.price_of_milkshake
 
-ShoppingCart.add_milkshake("nizars_milkshake")
-ShoppingCart.add_milkshake("alex_milkshake")
-puts ShoppingCart.milkshakes
+ShoppingCart.add_milkshake(nizars_milkshake)
+ShoppingCart.add_milkshake(alex_milkshake)
+#puts ShoppingCart.milkshakes
 
-#puts ShoppingCart.checkout
+ShoppingCart.show_milkshakes
+puts ShoppingCart.checkout
